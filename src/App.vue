@@ -1,5 +1,12 @@
 <template>
   <main>
+    <!-- <div class="overlay">
+      <div class="modal">
+        <textarea name="note" id="note" cols="30" rows="10"></textarea>
+        <button>Add Note</button>
+        <button class="close">Close</button>
+      </div>
+    </div> -->
     <div class="container">
       <header>
         <h1>Notes</h1>
@@ -38,6 +45,49 @@ main {
   width: 100vw;
 }
 
+.overlay {
+  position: absolute;
+  width: 100%; /* 100% of 100vw from main */
+  height: 100%; /* 100% of 100vh from main */
+  background: rgba(0, 0, 0, 0.77);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  width: 750px;
+  background: white;
+  border-radius: 0.625em; /* 10px */
+  padding: 1.875em; /* 30px */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+textarea {
+  /* border: none; */
+  width: 100%;
+}
+
+.modal button {
+  padding: 0.625em 1.25em; /* 10px 20px */
+  font-size: 1.25rem; /* 20px */
+  width: 100%;
+  margin-top: 0.625em; /* 10px */
+  background: blueviolet;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.modal .close {
+  background: rgba(193, 15, 15);
+}
+
 .container {
   max-width: 1000px;
   padding: 0.625em; /* 10px */
@@ -56,7 +106,7 @@ h1 {
   font-size: 4.5rem; /* 72px */
 }
 
-button {
+header button {
   border: none;
   padding: 0.625em; /* 10px */
   width: 2.5em; /* 40px */
