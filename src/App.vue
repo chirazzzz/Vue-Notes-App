@@ -2,7 +2,8 @@
 import { ref } from "vue";
 
 const showModal = ref(false);
-const newNote = ref(""); // Typing here will display in the note
+const newNote = ref(""); // Typing here will display placeholder text in the note
+const errorMessage = ref("");
 const notes = ref([]);
 
 const getRandomColor = () => {
@@ -10,6 +11,10 @@ const getRandomColor = () => {
 };
 
 const addNote = () => {
+  if (newNote.value.length < 10) {
+    return (errorMessage.value =
+      "Please write at least 10 characters in your note");
+  }
   notes.value.push({
     id: Math.floor(Math.random() * 1000000),
     text: newNote.value,
@@ -18,6 +23,7 @@ const addNote = () => {
   });
   showModal.value = false;
   newNote.value = "";
+  errorMessage.value = "";
 };
 </script>
 
@@ -27,12 +33,13 @@ const addNote = () => {
       <!-- could use v-show to add/remove display: none (better for SEO and screen readers cos the element is hidden not removed)-->
       <div class="modal">
         <textarea
-          v-model="newNote"
+          v-model.trim="newNote"
           name="note"
           id="note"
           cols="30"
           rows="10"
         ></textarea>
+        <p v-if="errorMessage">{{ errorMessage }}</p>
         <button @click="addNote">Add Note</button>
         <button class="close" @click="showModal = false">Close</button>
       </div>
@@ -104,6 +111,10 @@ textarea {
 
 .modal .close {
   background: rgba(193, 15, 15);
+}
+
+.modal p {
+  color: rgba(193, 15, 15);
 }
 
 .container {
