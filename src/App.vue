@@ -2,6 +2,7 @@
 import { ref } from "vue";
 
 const showModal = ref(false);
+const newNote = ref("Start typing your note here"); //
 </script>
 
 <template>
@@ -9,7 +10,13 @@ const showModal = ref(false);
     <div v-if="showModal" class="overlay">
       <!-- could use v-show to add/remove display: none (better for SEO and screen readers cos the element is hidden not removed)-->
       <div class="modal">
-        <textarea name="note" id="note" cols="30" rows="10"></textarea>
+        <textarea
+          v-model="newNote"
+          name="note"
+          id="note"
+          cols="30"
+          rows="10"
+        ></textarea>
         <button>Add Note</button>
         <button class="close" @click="showModal = false">Close</button>
       </div>
@@ -71,8 +78,6 @@ main {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
 textarea {
