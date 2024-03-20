@@ -6,7 +6,7 @@ const newNote = ref(""); // Typing here will display in the note
 const notes = ref([]);
 
 const getRandomColor = () => {
-  return `hsl(${Math.random() * 360}, 100%, 75%)`;
+  return `hsl(${Math.random() * 360}, 100%, 85%)`;
 };
 
 const addNote = () => {
@@ -43,26 +43,15 @@ const addNote = () => {
         <button @click="showModal = true">+</button>
       </header>
       <div class="cards-container">
-        <div class="card">
+        <div
+          v-for="note in notes"
+          class="card"
+          :style="{ background: note.backgroundColor }"
+        >
           <p class="main-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum fuga
-            tenetur at blanditiis perferendis accusamus!
+            {{ note.text }}
           </p>
-          <p class="date">04/07/6521</p>
-        </div>
-        <div class="card">
-          <p class="main-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum fuga
-            tenetur at blanditiis perferendis accusamus!
-          </p>
-          <p class="date">04/07/6521</p>
-        </div>
-        <div class="card">
-          <p class="main-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum fuga
-            tenetur at blanditiis perferendis accusamus!
-          </p>
-          <p class="date">04/07/6521</p>
+          <p class="date">{{ note.date.toLocaleDateString("en-UK") }}</p>
         </div>
       </div>
     </div>
