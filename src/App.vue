@@ -2,7 +2,23 @@
 import { ref } from "vue";
 
 const showModal = ref(false);
-const newNote = ref("Start typing your note here"); //
+const newNote = ref(""); // Typing here will display in the note
+const notes = ref([]);
+
+const getRandomColor = () => {
+  return `hsl(${Math.random() * 360}, 100%, 75%)`;
+};
+
+const addNote = () => {
+  notes.value.push({
+    id: Math.floor(Math.random() * 1000000),
+    text: newNote.value,
+    date: new Date(),
+    backgroundColor: getRandomColor(),
+  });
+  showModal.value = false;
+  newNote.value = "";
+};
 </script>
 
 <template>
@@ -17,7 +33,7 @@ const newNote = ref("Start typing your note here"); //
           cols="30"
           rows="10"
         ></textarea>
-        <button>Add Note</button>
+        <button @click="addNote">Add Note</button>
         <button class="close" @click="showModal = false">Close</button>
       </div>
     </div>
