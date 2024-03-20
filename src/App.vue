@@ -1,16 +1,23 @@
+<script setup>
+import { ref } from "vue";
+
+const showModal = ref(false);
+</script>
+
 <template>
   <main>
-    <!-- <div class="overlay">
+    <div v-if="showModal" class="overlay">
+      <!-- could use v-show to add/remove display: none (better for SEO and screen readers cos the element is hidden not removed)-->
       <div class="modal">
         <textarea name="note" id="note" cols="30" rows="10"></textarea>
         <button>Add Note</button>
-        <button class="close">Close</button>
+        <button class="close" @click="showModal = false">Close</button>
       </div>
-    </div> -->
+    </div>
     <div class="container">
       <header>
         <h1>Notes</h1>
-        <button>+</button>
+        <button @click="showModal = true">+</button>
       </header>
       <div class="cards-container">
         <div class="card">
